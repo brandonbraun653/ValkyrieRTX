@@ -43,11 +43,11 @@ void statusLed(void* parameter)
 	{
 		
 		gpio_set_level(BLINK_GPIO, 1);
-		//vTaskDelayUntil(&lastWakeTime, pdMS_TO_TICKS(100));
-		vTaskDelay(pdMS_TO_TICKS(100));
+		vTaskDelayUntil(&lastWakeTime, pdMS_TO_TICKS(100));
+		//vTaskDelay(pdMS_TO_TICKS(100));
 		
 		gpio_set_level(BLINK_GPIO, 0);
-		//vTaskDelayUntil(&lastWakeTime, pdMS_TO_TICKS(1000));
-		vTaskDelay(pdMS_TO_TICKS(1000));
+		vTaskDelayUntil(&lastWakeTime, pdMS_TO_TICKS(1000));
+		//vTaskDelay(pdMS_TO_TICKS(1000));
 	}
 }

@@ -70,7 +70,7 @@ void inputThread(void* parameter)
 		xSemaphoreGive(inputReady);
 		
 		/* Force runtime frequency of nearly 100 Hz (10mS period) */
-		//vTaskDelayUntil(&lastWakeTime, pdMS_TO_TICKS(10));
-		vTaskDelay(pdMS_TO_TICKS(10));
+		vTaskDelayUntil(&lastWakeTime, pdMS_TO_TICKS(10));
+		//vTaskDelay(pdMS_TO_TICKS(10));
 	}
 }

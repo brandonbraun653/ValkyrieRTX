@@ -48,7 +48,7 @@ void transmitThread(void* parameter)
 		uart_write_bytes(UART_NUM_1, reinterpret_cast<char*>(&txPacket), packetSize);
 		
 		/* Force runtime frequency of nearly 50 Hz (20mS period) */
-		//vTaskDelayUntil(&lastWakeTime, pdMS_TO_TICKS(20));
-		vTaskDelay(pdMS_TO_TICKS(20));
+		vTaskDelayUntil(&lastWakeTime, pdMS_TO_TICKS(20));
+		//vTaskDelay(pdMS_TO_TICKS(20));
 	}
 }
