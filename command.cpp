@@ -1,4 +1,5 @@
 #include "command.hpp"
+#include "rtx.hpp"
 
 
 void commandThread(void* parameter)
@@ -11,11 +12,8 @@ void commandThread(void* parameter)
 		xSemaphoreTake(inputReady, portMAX_DELAY);
 		
 		
-		//Do all the things here
-		cmdResults.THROTTLE = inputData.THROTTLE;
-		cmdResults.ROLL = inputData.ROLL;
-		cmdResults.PITCH = inputData.PITCH;
-		cmdResults.YAW = inputData.YAW;
+		//have one type that you just pass around and add more data to 
+		internalPkt.pktType = PACKET_CONTROLS;
 		
 		/* Inform the packetization thread that it should now execute */
 		xSemaphoreGive(commandReady);

@@ -1,4 +1,5 @@
 #include "transmit.hpp"
+#include <string.h>
 #include "freertos/task.h"
 #include "driver/uart.h"
 #include "driver/gpio.h"
@@ -31,8 +32,12 @@ void transmitThread(void* parameter)
 	error = uart_driver_install(UART_NUM_1, BUFF_SIZE, BUFF_SIZE, 0, NULL, 0);
 	
 	size_t packetSize = sizeof(txPacket);
+	char b[packetSize];
 	
+	/* Delay until the XBEE has had time to connect to it's partner...
+	 * TODO: Implement another task to wait until everything has connected before starting off the main thread */
 	TickType_t lastWakeTime = xTaskGetTickCount();
+	vTaskDelayUntil(&lastWakeTime, pdMS_TO_TICKS(5000));
 	
 	for (;;)
 	{
@@ -40,15 +45,16 @@ void transmitThread(void* parameter)
 		 * available before defaulting to using the last copied data. */
 		if (xSemaphoreTake(outputBufferMutex, 5) == pdPASS)
 		{
-			txPacket = pktData;
+			txPacket = txPkt;
 			xSemaphoreGive(outputBufferMutex);
 		}
 		
 		/* Transmit everything out in one burst (less than 54 bytes) */
-		uart_write_bytes(UART_NUM_1, reinterpret_cast<char*>(&txPacket), packetSize);
+		memcpy(b, &txPacket, packetSize);
+		uart_write_bytes(UART_NUM_1, b, packetSize);
+		//uart_write_bytes(UART_NUM_1, reinterpret_cast<char*>(&txPacket), packetSize);
 		
 		/* Force runtime frequency of nearly 50 Hz (20mS period) */
 		vTaskDelayUntil(&lastWakeTime, pdMS_TO_TICKS(20));
-		//vTaskDelay(pdMS_TO_TICKS(20));
 	}
 }

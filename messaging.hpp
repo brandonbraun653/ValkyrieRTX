@@ -16,8 +16,6 @@ extern SemaphoreHandle_t commandReady;
 extern SemaphoreHandle_t outputBufferMutex;
 
 /* Buffers for passing data between tasks */
-extern inputReadings inputData;
-extern parseResults cmdResults;
-extern packetData pktData;
+extern packetData internalPkt, txPkt;
 
 #endif /* MESSAGING_HPP_ */

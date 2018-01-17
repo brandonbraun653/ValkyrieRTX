@@ -13,30 +13,12 @@ static const packetTypes PACKET_COMMAND		= 1;
 static const packetTypes PACKET_CONTROLS	= 2;
 static const packetTypes PACKET_REQUEST		= 4;
 
-
-struct inputReadings
-{
-	float SWR = 0.0;
-	float SWL = 0.0;
-	float THROTTLE = 0.0;
-	float ROLL = 0.0;
-	float PITCH = 0.0;
-	float YAW = 0.0;
-};
-
-struct parseResults
-{
-	
-	float THROTTLE = 0.0;
-	float ROLL = 0.0;
-	float PITCH = 0.0;
-	float YAW = 0.0;
-};
-
 #pragma pack(push,1)
 struct packetData
 {
 	packetTypes pktType = PACKET_CONTROLS;
+	float SWR = 0.0;
+	float SWL = 0.0;
 	float THROTTLE = 0.0;
 	float ROLL = 0.0;
 	float PITCH = 0.0;

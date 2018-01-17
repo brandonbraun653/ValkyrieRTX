@@ -8,6 +8,5 @@ SemaphoreHandle_t commandReady = xSemaphoreCreateBinary();
 SemaphoreHandle_t outputBufferMutex = xSemaphoreCreateMutex();
 
 /* Buffers */
-inputReadings inputData;
-parseResults cmdResults;
-packetData pktData;
+packetData txPkt;
+packetData internalPkt;

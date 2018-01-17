@@ -53,12 +53,12 @@ void inputThread(void* parameter)
 	for (;;)
 	{
 		/* Grab all the readings, convert, and place them into the output buffer */
-		inputData.SWR		= VDDA * (adc1_get_voltage(SWR) / RES);
-		inputData.SWL		= VDDA * (adc1_get_voltage(SWL) / RES);
-		inputData.THROTTLE	= VDDA * (adc1_get_voltage(THROTTLE) / RES);
-		inputData.ROLL		= VDDA * (adc1_get_voltage(ROLL) / RES);
-		inputData.PITCH		= VDDA * (adc1_get_voltage(PITCH) / RES);
-		inputData.YAW		= VDDA * (adc1_get_voltage(YAW) / RES);
+		internalPkt.SWR			= VDDA * (adc1_get_voltage(SWR) / RES);
+		internalPkt.SWL			= VDDA * (adc1_get_voltage(SWL) / RES);
+		internalPkt.THROTTLE	= VDDA * (adc1_get_voltage(THROTTLE) / RES);
+		internalPkt.ROLL		= VDDA * (adc1_get_voltage(ROLL) / RES);
+		internalPkt.PITCH		= VDDA * (adc1_get_voltage(PITCH) / RES);
+		internalPkt.YAW			= VDDA * (adc1_get_voltage(YAW) / RES);
 		
 		#ifdef DEBUG
 		gpio_set_level(sigPin, 0);

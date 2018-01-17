@@ -9,11 +9,8 @@ void packetThread(void* parameter)
 		xSemaphoreTake(commandReady, portMAX_DELAY);
 		xSemaphoreTake(outputBufferMutex, portMAX_DELAY);
 		
-		//Write data here
-		pktData.THROTTLE = cmdResults.THROTTLE;
-		pktData.ROLL = cmdResults.ROLL;
-		pktData.PITCH = cmdResults.PITCH;
-		pktData.YAW = cmdResults.YAW;
+		//Copy over to txbuffer
+		txPkt = internalPkt;
 		
 		/* Release the mutex to allow the TX thread to use new data */
 		xSemaphoreGive(outputBufferMutex);
